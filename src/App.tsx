@@ -6,18 +6,19 @@ import Navbar from './components/Navbar';
 import Skills from './components/Skills';
 import ProjectCard from './components/ProjectCard';
 import Timeline, { Experience } from './components/Timeline';
+
 import perfil from './assets/img/perfil.png';
-import { FaBriefcase  as _FaBriefcase  } from 'react-icons/fa';
+import svglDemo from './assets/img/svgl-demo.png';
+import adventjsDemo from './assets/img/adventjs-demo.png';
 
-// Import y casteo de íconos
+import { FaBriefcase as _FaBriefcase } from 'react-icons/fa';
 import { AiOutlineMail as _AiOutlineMail } from 'react-icons/ai';
-import { FaLinkedin as _FaLinkedin }         from 'react-icons/fa';
+import { FaLinkedin as _FaLinkedin } from 'react-icons/fa';
 
+const FaBriefcase = _FaBriefcase as React.FC<IconBaseProps>;
 const AiOutlineMail = _AiOutlineMail as React.FC<IconBaseProps>;
 const FaLinkedin   = _FaLinkedin   as React.FC<IconBaseProps>;
-const FaBriefcase   = _FaBriefcase   as React.FC<IconBaseProps>;
 
-// Datos extraídos de tu CV
 const experiencia: Experience[] = [
   {
     title: 'Front‑End Developer',
@@ -93,12 +94,24 @@ function App() {
 
   const proyectos = [
     {
-      title: 'SOC Dashboard',
-      description: 'Dashboard para atención de brokers en tiempo real.',
-      tech: ['React', 'TypeScript', 'Tailwind'],
-      link: 'https://github.com/tu-usuario/botSoc-dashboard'
+      title: 'SVGL – A beautiful library with SVG logos',
+      description:
+        'Biblioteca de logos SVG de las marcas más populares. +10k visitas al mes, +2K svgs descargados. Creado desde cero con Next.js, React y Tailwind CSS.',
+      tech: ['Next.js', 'Tailwind CSS'],
+      image: svglDemo,
+      linkCode: 'https://github.com/tu-usuario/svgl',
+      linkPreview: 'https://svgl.vercel.app'
     },
-    // más proyectos…
+    {
+      title: 'AdventJS – Retos de programación con JavaScript y TypeScript',
+      description:
+        'Plataforma gratuita con retos de programación. Más de 1 millon de visitas en un mes, +50K retos completados. Creada desde cero con Next.js, React y Tailwind CSS.',
+      tech: ['Next.js', 'Tailwind CSS'],
+      image: adventjsDemo,
+      linkCode: undefined,
+      linkPreview: 'https://adventjs.com'
+    }
+    // puedes añadir más proyectos aquí…
   ];
 
   return (
@@ -156,14 +169,35 @@ function App() {
 
           {/* Experiencia Laboral */}
           <section id="experiencia" className="py-20 container mx-auto px-4">
-       <h2 className="text-3xl font-semibold mb-8 flex items-center">
-         <FaBriefcase className="text-2xl mr-2" />
-         Experiencia Laboral
-       </h2>
+            <h2 className="text-3xl font-semibold mb-8 flex items-center">
+              <FaBriefcase className="text-2xl mr-2" />
+              Experiencia Laboral
+            </h2>
             <Timeline entries={experiencia} />
           </section>
 
-          {/* Sobre mí */}
+          {/* Proyectos Destacados */}
+          <section id="proyectos" className="py-20 container mx-auto px-4">
+            <h2 className="text-3xl font-semibold mb-8 flex items-center">
+              <code className="text-xl mr-2">{"</>"}</code> Proyectos Destacados
+            </h2>
+            <div className="flex flex-col gap-12">
+              {proyectos.map((p, i) => (
+                <ProjectCard key={i} {...p} />
+              ))}
+            </div>
+          </section>
+
+          {/* Habilidades */}
+          <section id="habilidades" className="py-20 container mx-auto px-4">
+            <h2 className="text-3xl font-semibold mb-6">
+              Habilidades &amp; Herramientas
+            </h2>
+            <Skills />
+          </section>
+
+
+                    {/* Sobre mí */}
           <section id="sobremi" className="py-20 container mx-auto px-4">
             <h2 className="text-3xl font-semibold mb-6">Sobre mí</h2>
             <p className="text-lg text-gray-700 dark:text-gray-300">
@@ -171,50 +205,6 @@ function App() {
               React Native y Next.js. Me especializo en interfaces interactivas,
               rendimiento y buenas prácticas de accesibilidad y testing.
             </p>
-          </section>
-
-          {/* Proyectos Destacados */}
-          <section id="proyectos" className="py-20 container mx-auto px-4">
-            <h2 className="text-3xl font-semibold mb-6">Proyectos Destacados</h2>
-            <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {proyectos.map(p => (
-                <ProjectCard key={p.title} {...p} />
-              ))}
-            </div>
-          </section>
-
-          {/* Habilidades */}
-          <section id="habilidades" className="py-20 container mx-auto px-4">
-            <h2 className="text-3xl font-semibold mb-6">Habilidades & Herramientas</h2>
-            <Skills />
-          </section>
-
-          {/* Contacto */}
-          <section id="contacto" className="py-20 container mx-auto px-4">
-            <h2 className="text-3xl font-semibold mb-6">Contacto</h2>
-            <form className="max-w-lg mx-auto space-y-4">
-              <input
-                type="text"
-                placeholder="Tu nombre"
-                className="w-full p-3 border rounded bg-white dark:bg-gray-700"
-              />
-              <input
-                type="email"
-                placeholder="Tu email"
-                className="w-full p-3 border rounded bg-white dark:bg-gray-700"
-              />
-              <textarea
-                placeholder="Mensaje"
-                rows={4}
-                className="w-full p-3 border rounded bg-white dark:bg-gray-700"
-              />
-              <button
-                type="submit"
-                className="px-6 py-3 bg-blue-600 text-white rounded hover:bg-blue-500 transition"
-              >
-                Enviar
-              </button>
-            </form>
           </section>
         </main>
       </div>
