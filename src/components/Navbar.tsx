@@ -81,36 +81,36 @@ export default function Navbar({ theme, setTheme }: Props) {
           }
         </button>
       </div>
+{/* Menú desplegable móvil */}
+{menuOpen && (
+  <div
+    className={`
+      absolute top-full mt-2
+      left-1/2 transform -translate-x-1/2
+      w-11/12 max-w-xs
+      ${bgPill} rounded-xl px-4 py-3
+      shadow-lg
+    `}
+  >
+    <ul className="flex flex-col space-y-3">
+      {NAV_ITEMS.map(item => (
+        <li key={item.id}>
+          <a
+            href={`#${item.id}`}
+            onClick={() => setMenuOpen(false)}
+            className={`block text-center transition-colors ${textPill}`}
+          >
+            {item.title}
+          </a>
+        </li>
+      ))}
+      <li className="flex justify-end pt-2 border-t border-gray-300">
+        <ThemeToggle theme={theme} setTheme={setTheme} />
+      </li>
+    </ul>
+  </div>
+)}
 
-      {/* Menú desplegable móvil */}
-      {menuOpen && (
-        <div
-          className={`
-            absolute top-full mt-2
-            left-1/2 transform -translate-x-1/2
-            w-11/12 max-w-xs
-            ${bgPill} rounded-xl px-4 py-3
-            shadow-lg
-          `}
-        >
-          <ul className="flex flex-col space-y-3">
-            {NAV_ITEMS.map(item => (
-              <li key={item.id}>
-                <a
-                  href={`#${item.id}`}
-                  onClick={() => setMenuOpen(false)}
-                  className={`block text-center transition-colors ${textPill}`}
-                >
-                  {item.title}
-                </a>
-              </li>
-            ))}
-            <li className="flex justify-center pt-2 border-t border-gray-300">
-              <ThemeToggle theme={theme} setTheme={setTheme} />
-            </li>
-          </ul>
-        </div>
-      )}
     </nav>
   );
 }

@@ -7,6 +7,9 @@ import Skills from './components/Skills';
 import Timeline, { Experience } from './components/Timeline';
 import ProjectCard from './components/ProjectCard';
 import ScrollReveal from './components/ScrollReveal'
+import { FiDownload as _FiDownload } from 'react-icons/fi'
+
+
 
 
 import perfil from './assets/img/perfil.png';
@@ -27,6 +30,8 @@ const FaBriefcase = _FaBriefcase as React.FC<IconBaseProps>;
 const AiOutlineMail = _AiOutlineMail as React.FC<IconBaseProps>;
 const FaLinkedin = _FaLinkedin as React.FC<IconBaseProps>;
 const FaGithub = _FaGithub as React.FC<IconBaseProps>;
+const FiDownload = _FiDownload as React.FC<IconBaseProps>
+
 
 
 const experiencia: Experience[] = [
@@ -68,6 +73,9 @@ const experiencia: Experience[] = [
         </li>
         <li>
           Desarrollo de dashboards interactivos con Next.js y consumo de APIs.
+        </li>
+        <li>
+          Desarrollé la capa de backend en Python usando Socket.io para habilitar comunicación bidireccional. Me encargué de la configuración de envío y recepción de mensajes, garantizando sincronización instantánea y fiable de las conversaciones.
         </li>
       </ul>
     )
@@ -166,48 +174,70 @@ function App() {
             {/* Hero */}
             <section
               id="hero"
-              className="min-h-[70vh] flex flex-col justify-center items-start md:items-center text-left md:text-center px-4 py-12"
+              className="
+    min-h-[70vh] flex flex-col justify-center
+    items-start md:items-center text-left md:text-center
+    px-4 py-12
+  "
             >
               <img
                 src={perfil}
                 alt="Foto de perfil"
-                className="w-32 h-32 mb-4"
+                className="w-24 h-24 md:w-32 md:h-32 mb-4 rounded-full object-cover"
               />
-              <h1 className="text-5xl font-bold mb-3">
+
+              <h1 className="text-4xl md:text-5xl font-bold mb-3">
                 Hey, soy <span className="text-cyan-400">Edson Rodríguez</span>
               </h1>
-              <p className="max-w-3xl text-lg leading-relaxed text-gray-700 dark:text-gray-300">
+
+              <p className="max-w-3xl text-base md:text-lg leading-relaxed text-gray-700 dark:text-gray-300">
                 <span className="text-yellow-400">+4 años de experiencia. </span>
-                Frontend Developer y Creador de interfaces interactivas desde Autlan de Navarro, México. Experto en React, React Native, Next.js y Tailwind CSS, construyendo aplicaciones web como moviles únicas y de alto rendimiento.
+                Frontend Developer y creador de interfaces interactivas desde Autlán de Navarro, México.
+                Experto en React, React Native, Next.js y Tailwind CSS, construyendo aplicaciones web y móviles
+                de alto rendimiento.
               </p>
-              <div className="mt-6 flex space-x-4">
+
+              <div className="mt-6 flex flex-row flex-wrap gap-3">
                 <a
                   href="mailto:edsonrf896@gmail.com"
-                  className="inline-flex items-center px-6 py-3 border border-gray-300 rounded-full text-gray-800 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700 transition"
+                  className="inline-flex items-center px-4 py-2 border border-gray-300 rounded-full text-gray-800 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700 transition"
                 >
-                  <AiOutlineMail className="mr-2 text-xl" />
-                  Contáctame
+                  <AiOutlineMail className="text-lg md:text-xl" />
+                  <span className="hidden md:inline ml-2">Contáctame</span>
                 </a>
+
                 <a
                   href="https://www.linkedin.com/in/edson-rodriguez-219820253/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center px-6 py-3 border border-gray-300 rounded-full text-gray-800 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700 transition"
+                  className="inline-flex items-center px-4 py-2 border border-gray-300 rounded-full text-gray-800 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700 transition"
                 >
-                  <FaLinkedin className="mr-2 text-xl" />
-                  LinkedIn
+                  <FaLinkedin className="text-lg md:text-xl" />
+                  <span className="hidden md:inline ml-2">LinkedIn</span>
                 </a>
+
                 <a
                   href="https://github.com/edson150bpm"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center px-6 py-3 border border-gray-300 rounded-full text-gray-800 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700 transition"
+                  className="inline-flex items-center px-4 py-2 border border-gray-300 rounded-full text-gray-800 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700 transition"
                 >
-                  <FaGithub className="mr-2 text-xl" />
-                  GitHub
+                  <FaGithub className="text-lg md:text-xl" />
+                  <span className="hidden md:inline ml-2">GitHub</span>
+                </a>
+
+                <a
+                  href="/Edson_Alejandro_Rodriguez_Flores_CV.pdf"
+                  download
+                  className="inline-flex items-center px-4 py-2 border border-gray-300 rounded-full text-gray-800 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700 transition"
+                >
+                  <FiDownload className="text-lg md:text-xl" />
+                  <span className="hidden md:inline ml-2">Descargar CV</span>
                 </a>
               </div>
             </section>
+
+
           </ScrollReveal>
 
           {/* Experiencia Laboral */}
@@ -220,26 +250,46 @@ function App() {
               <Timeline entries={experiencia} />
             </section>
           </ScrollReveal>
-          <ScrollReveal>
-            {/* Proyectos Destacados */}
-            <section id="proyectos" className="py-20 container mx-auto px-4">
-              <h2 className="text-3xl font-semibold mb-8 flex items-center text-gray-900 dark:text-gray-100">
-                <code className="text-xl mr-2">{"</>"}</code> Proyectos Destacados
-              </h2>
 
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
-                {proyectos.map((p, i) => (
-                  <div
-                    key={i}
-                    className="cursor-pointer"
-                    onClick={() => setLightboxImg(p.image)}
-                  >
-                    <ProjectCard {...p} />
-                  </div>
-                ))}
-              </div>
-            </section>
-          </ScrollReveal>
+<ScrollReveal>
+  {/* Proyectos Destacados */}
+  <section id="proyectos" className="py-20">
+    {/* ❌ Aquí ya no ponemos container directamente en <section> */}
+    <div className="container mx-auto px-4">
+      <h2 className="text-3xl font-semibold mb-8 flex items-center text-gray-900 dark:text-gray-100">
+        <code className="text-xl mr-2">{"</>"}</code> Proyectos Destacados
+      </h2>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
+        {proyectos.map((p, i) => (
+          <ProjectCard
+            key={i}
+            {...p}
+            onImageClick={() => setLightboxImg(p.image)}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+</ScrollReveal>
+
+          {/* Aquí movemos el Lightbox fuera de cualquier <ScrollReveal> */}
+          {lightboxImg && (
+            <div
+              className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 p-4"
+              onClick={() => setLightboxImg(null)}
+            >
+              <img
+                src={lightboxImg}
+                alt="Preview"
+                className="
+                  max-h-[80vh] max-w-[90vw]
+                  sm:max-w-[70vw] md:max-w-[50vw]
+                  rounded-lg shadow-lg
+                "
+              />
+            </div>
+          )}
+
 
           {/* Lightbox Modal */}
           <ScrollReveal>
@@ -281,7 +331,7 @@ function App() {
                 <span className="text-yellow-400">Teleinformática</span> egresado de la{' '}
                 <span className="text-yellow-400">Universidad de Guadalajara</span>. Cuento con{' '}
                 <span className="text-yellow-400">más de cuatro años de experiencia</span> colaborando
-                 estrechamente con equipos de desarrollo en la Universidad de Guadalajara como en{' '}
+                estrechamente con equipos de desarrollo en la Universidad de Guadalajara como en{' '}
                 <span className="text-yellow-400">Vulcanics</span> (actualmente de forma remota),
                 liderando proyectos de extremo a extremo.
               </p>
@@ -289,14 +339,14 @@ function App() {
               <p className="text-lg text-gray-700 dark:text-gray-300">
                 Tengo experiencia implementando arquitecturas <span className="text-yellow-400">MVC</span> con{' '}
                 <span className="text-yellow-400">Laravel</span> y <span className="text-yellow-400">PHP</span>, desarrollando
-                interfaces y prototipos en <span className="text-yellow-400">Figma</span>, y construyendo aplicaciones
+                interfaces y prototipos en Figma, y construyendo aplicaciones
                 web y móviles usando tecnologías como{' '}
                 <span className="text-yellow-400">React</span>, <span className="text-yellow-400">React Native</span>,{' '}
                 <span className="text-yellow-400">Next.js</span> y <span className="text-yellow-400">Tailwind CSS</span>.
 
-                Disfruto <span className="text-yellow-400">trabajar en equipo</span>, escribir código limpio y escalable,
+                Disfruto trabajar en equipo, escribir código limpio y escalable,
                 y enfocarme en la optimización del rendimiento aplicando buenas prácticas y patrones de diseño. Soy
-                autodidacta y siempre estoy explorando <span className="text-yellow-400">nuevas tecnologías</span>, desde integrar{' '}
+                autodidacta y siempre estoy explorando nuevas tecnologías, desde integrar{' '}
                 <span className="text-yellow-400">Firebase</span> para funcionalidades en tiempo real, hasta desplegar servicios
                 en <span className="text-yellow-400">Ubuntu</span> con <span className="text-yellow-400">Nginx</span> y{' '}
                 <span className="text-yellow-400">PM2</span>. Me motiva encontrar soluciones innovadoras que sean accesibles y eficientes.

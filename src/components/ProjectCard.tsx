@@ -1,4 +1,3 @@
-// src/components/ProjectCard.tsx
 import React, { useState, useRef, useLayoutEffect } from 'react'
 
 interface Props {
@@ -6,7 +5,7 @@ interface Props {
   description: string
   tech: string[]
   image: string
-  onImageClick?: () => void
+  onImageClick?: () => void   // <-- recibe el callback
 }
 
 export default function ProjectCard({
@@ -18,12 +17,9 @@ export default function ProjectCard({
 }: Props) {
   const [expanded, setExpanded] = useState(false)
   const contentRef = useRef<HTMLDivElement>(null)
-  const [height, setHeight] = useState<number>(0)
-
-  // Altura cerrada en píxeles (aprox. 4 líneas de texto)
+  const [height, setHeight] = useState(0)
   const COLLAPSED_HEIGHT = 96
 
-  // Cada vez que cambie expanded, recalculamos scrollHeight
   useLayoutEffect(() => {
     if (contentRef.current) {
       const full = contentRef.current.scrollHeight
@@ -31,21 +27,18 @@ export default function ProjectCard({
     }
   }, [expanded, description])
 
-  // ¿Descripción larga?
   const isLong = description.length > 150
 
   return (
-    <div
-      className="
-        h-full flex flex-col
-        bg-gradient-to-br from-cyan-50 via-white to-cyan-50
-        dark:from-gray-800 dark:via-gray-900 dark:to-gray-800
-        p-6 rounded-lg shadow-lg
-        transform transition-transform duration-300 hover:scale-105
-        overflow-hidden
-      "
-    >
-      {/* Imagen */}
+    <div className="
+      h-full flex flex-col
+      bg-gradient-to-br from-cyan-50 via-white to-cyan-50
+      dark:from-gray-800 dark:via-gray-900 dark:to-gray-800
+      p-6 rounded-lg shadow-lg
+      transform transition-transform duration-300 hover:scale-105
+      overflow-hidden
+    ">
+      {/* Imagen: aquí va el click */}
       <img
         className="w-full h-48 object-cover cursor-pointer rounded-md"
         src={image}
@@ -55,14 +48,12 @@ export default function ProjectCard({
 
       {/* Contenido */}
       <div className="mt-4 flex-1 flex flex-col">
-        <h3
-          className="
-            text-2xl font-semibold mb-2
-            text-transparent bg-clip-text
-            bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500
-            animate-pulse
-          "
-        >
+        <h3 className="
+          text-2xl font-semibold mb-2
+          text-transparent bg-clip-text
+          bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500
+          animate-pulse
+        ">
           {title}
         </h3>
 
