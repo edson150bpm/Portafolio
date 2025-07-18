@@ -1,23 +1,31 @@
 // src/App.tsx
-import React from 'react';
+import React, { useState } from 'react';
 import type { IconBaseProps } from 'react-icons';
 import useTheme from './hooks/useTheme';
 import Navbar from './components/Navbar';
 import Skills from './components/Skills';
-import ProjectCard from './components/ProjectCard';
 import Timeline, { Experience } from './components/Timeline';
+import ProjectCard from './components/ProjectCard';
 
 import perfil from './assets/img/perfil.png';
-import svglDemo from './assets/img/svgl-demo.png';
-import adventjsDemo from './assets/img/adventjs-demo.png';
+import siaImg from './assets/img/sia.png';
+import brokersImg from './assets/img/brokersImg.png';
+import chatbotImg from './assets/img/chatbot.png';
+import mako from './assets/img/mako.png';
+import skala from './assets/img/skala.png';
+import makoDiccionario from './assets/img/makoDiccionario.png';
 
 import { FaBriefcase as _FaBriefcase } from 'react-icons/fa';
 import { AiOutlineMail as _AiOutlineMail } from 'react-icons/ai';
 import { FaLinkedin as _FaLinkedin } from 'react-icons/fa';
+import { FaGithub as _FaGithub } from 'react-icons/fa';
+
 
 const FaBriefcase = _FaBriefcase as React.FC<IconBaseProps>;
 const AiOutlineMail = _AiOutlineMail as React.FC<IconBaseProps>;
-const FaLinkedin   = _FaLinkedin   as React.FC<IconBaseProps>;
+const FaLinkedin = _FaLinkedin as React.FC<IconBaseProps>;
+const FaGithub = _FaGithub as React.FC<IconBaseProps>;
+
 
 const experiencia: Experience[] = [
   {
@@ -91,61 +99,84 @@ const experiencia: Experience[] = [
 
 function App() {
   const [theme, setTheme] = useTheme();
+  const [lightboxImg, setLightboxImg] = useState<string | null>(null);
 
   const proyectos = [
     {
-      title: 'SVGL – A beautiful library with SVG logos',
+      title: 'Sistema de Información Académica',
       description:
-        'Biblioteca de logos SVG de las marcas más populares. +10k visitas al mes, +2K svgs descargados. Creado desde cero con Next.js, React y Tailwind CSS.',
-      tech: ['Next.js', 'Tailwind CSS'],
-      image: svglDemo,
-      linkCode: 'https://github.com/tu-usuario/svgl',
-      linkPreview: 'https://svgl.vercel.app'
+        'Desarrollé y lideré de manera integral el Sistema de Información Académica (SIA), encargado de gestionar los módulos de no‑adeudos, admisión y titulación. Me encargué de todo el ciclo: recogida de requisitos, diseño UI/UX con componentes de Bootstrap, implementación de la arquitectura back‑end con Laravel, PHP, Eloquent ORM y MySQL, y construcción del front‑end accesible y responsivo.',
+      tech: ['Laravel', 'PHP', 'Eloquent', 'MySQL'],
+      image: siaImg
     },
     {
-      title: 'AdventJS – Retos de programación con JavaScript y TypeScript',
+      title: 'Módulos Móviles de Brokers',
       description:
-        'Plataforma gratuita con retos de programación. Más de 1 millon de visitas en un mes, +50K retos completados. Creada desde cero con Next.js, React y Tailwind CSS.',
-      tech: ['Next.js', 'Tailwind CSS'],
-      image: adventjsDemo,
-      linkCode: undefined,
-      linkPreview: 'https://adventjs.com'
+        'Actualmente implemento y doy mantenimiento a los módulos móviles de la aplicación de brokers, desarrollada con React Native y Expo; me encargo de añadir nuevas funcionalidades y optimizar los módulos existentes, así como de gestionar el despliegue continuo en Google Play Store y App Store, garantizando actualizaciones sin incidencias. Además, integré Firebase para el almacenamiento y sincronización de datos en tiempo real, permitiendo que la aplicación refleje instantáneamente cualquier cambio y ofrezca una experiencia de usuario fluida y reactiva.',
+      tech: ['React Native', 'Expo', 'TypeScript', 'Firebase'],
+      image: brokersImg
+    },
+    {
+      title: 'Dashboard de Chatbot Financiero',
+      description:
+        'Desarrollé el dashboard de administración del chatbot financiero con React y TypeScript, siguiendo una arquitectura limpia y fácilmente mantenible. La interfaz muestra métricas e historiales de conversación del chatbot, e incluye secciones para responder chats en tiempo real mediante un sistema de WebSockets, además de recibir notificaciones instantáneas que facilitan el seguimiento y control de las interacciones. Gracias al consumo de APIs especializadas, el dashboard permite a los brokers gestionar dudas, preguntas y solicitudes de forma rápida y eficiente, mejorando significativamente la atención al cliente.',
+      tech: ['React', 'Tailwind CSS', 'Socket.io'],
+      image: chatbotImg
+    },
+    {
+      title: 'Dashboard de Chatbot Inteligente para Arrendamientos',
+      description:
+        'Actualmente doy mantenimiento y desarrollo nuevas funcionalidades en el dashboard de administración de arrendamientos. La plataforma consume APIs externas para integrar servicios de verificación, notificaciones y datos del chatbot inteligente. Ofrece secciones para revisar y filtrar los archivos que envían los usuarios, así como para monitorear en tiempo real las conversaciones con el bot. Gracias a su arquitectura modular y a las mejoras continuas, hemos optimizado la usabilidad, el rendimiento y la capacidad de escalar a nuevos flujos de trabajo.',
+      tech: ['Next.js', 'TypeScript', 'Tailwind CSS'],
+      image: mako
+    },
+    {
+      title: 'Skala: Plataforma de Matching de Talento con IA',
+      description:
+        'Implementé completamente el front‑end de Skala a partir de un prototipo en Figma. La aplicación, desarrollada en React y JavaScript, consume APIs REST que exponen los resultados de un motor de scraping en el back‑end, y presenta en tiempo real las mejores coincidencias de candidatos según los requisitos definidos. El UI se construyó con Tailwind CSS para lograr una interfaz ágil, responsiva y fácil de mantener.',
+      tech: ['React', 'Tailwind CSS', 'JavaScript'],
+      image: skala
+    },
+    {
+      title: 'Panel de Vocabulario para Chatbot de Arrendamiento',
+      description:
+        'Desarrollé de forma integral el front‑end de Mako Diccionario, un panel construido en React que permite añadir, editar y eliminar palabras clave y sus definiciones para el chatbot de arrendamiento. Me encargué tanto del diseño UI en Tailwind CSS como de la implementación funcional, incluyendo la gestión de credenciales de servicio que el bot utiliza y que deben rotarse periódicamente. La aplicación consume APIs REST para realizar todas las operaciones CRUD y actualizar credenciales, ofreciendo una experiencia fluida y segura.',
+      tech: ['React', 'JavaScript', 'API REST', 'Tailwind CSS'],
+      image: makoDiccionario
     }
-    // puedes añadir más proyectos aquí…
   ];
 
   return (
     <div className={theme === 'dark' ? 'dark' : ''}>
-      <div className="min-h-screen bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-100 transition-colors duration-300 ease-in-out">
+      <div
+        className={`
+          min-h-screen
+          bg-gradient-to-br from-cyan-50 via-white to-cyan-50
+          dark:from-gray-800 dark:via-gray-900 dark:to-gray-800
+          text-gray-900 dark:text-gray-100
+          transition-colors duration-300 ease-in-out
+        `}
+      >
         <Navbar theme={theme} setTheme={setTheme} />
 
         <main className="pt-20">
           {/* Hero */}
           <section
             id="hero"
-            className="
-              min-h-[70vh] flex flex-col justify-center
-              items-start md:items-center text-left md:text-center
-              px-4 py-12
-            "
+            className="min-h-[70vh] flex flex-col justify-center items-start md:items-center text-left md:text-center px-4 py-12"
           >
             <img
               src={perfil}
               alt="Foto de perfil"
-              className="w-32 h-32 rounded-full object-cover mb-4 ring-4 ring-white dark:ring-gray-900"
+              className="w-32 h-32 mb-4"
             />
-            <span className="mb-3 inline-block px-5 py-2 border-2 border-cyan-500 text-cyan-500 rounded-full font-medium">
-              Disponible para trabajar
-            </span>
             <h1 className="text-5xl font-bold mb-3">
               Hey, soy <span className="text-cyan-400">Edson Rodríguez</span>
             </h1>
             <p className="max-w-3xl text-lg leading-relaxed text-gray-700 dark:text-gray-300">
               Frontend Developer con{' '}
               <span className="text-yellow-400">más de 4 años</span> de experiencia
-              construyendo interfaces con React, React Native y Next.js. He trabajado
-              en dashboards en tiempo real, chatbots financieros y análisis de datos,
-              integrando APIs REST y WebSockets.
+              construyendo interfaces con React, React Native y Next.js.
             </p>
             <div className="mt-6 flex space-x-4">
               <a
@@ -156,13 +187,22 @@ function App() {
                 Contáctame
               </a>
               <a
-                href="https://linkedin.com/in/tu-perfil"
+                href="https://www.linkedin.com/in/edson-rodriguez-219820253/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center px-6 py-3 border border-gray-300 rounded-full text-gray-800 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700 transition"
               >
                 <FaLinkedin className="mr-2 text-xl" />
                 LinkedIn
+              </a>
+              <a
+                href="https://github.com/edson150bpm"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center px-6 py-3 border border-gray-300 rounded-full text-gray-800 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700 transition"
+              >
+                <FaGithub className="mr-2 text-xl" />
+                GitHub
               </a>
             </div>
           </section>
@@ -178,15 +218,40 @@ function App() {
 
           {/* Proyectos Destacados */}
           <section id="proyectos" className="py-20 container mx-auto px-4">
-            <h2 className="text-3xl font-semibold mb-8 flex items-center">
+            <h2 className="text-3xl font-semibold mb-8 flex items-center text-gray-900 dark:text-gray-100">
               <code className="text-xl mr-2">{"</>"}</code> Proyectos Destacados
             </h2>
-            <div className="flex flex-col gap-12">
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
               {proyectos.map((p, i) => (
-                <ProjectCard key={i} {...p} />
+                <div
+                  key={i}
+                  className="cursor-pointer"
+                  onClick={() => setLightboxImg(p.image)}
+                >
+                  <ProjectCard {...p} />
+                </div>
               ))}
             </div>
           </section>
+
+          {/* Lightbox Modal */}
+          {lightboxImg && (
+            <div
+              className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 p-4"
+              onClick={() => setLightboxImg(null)}
+            >
+              <img
+                src={lightboxImg}
+                alt="Preview"
+                className="
+                  max-h-[80vh] max-w-[90vw]
+                  sm:max-w-[70vw] md:max-w-[50vw]
+                  rounded-lg shadow-lg
+                "
+              />
+            </div>
+          )}
 
           {/* Habilidades */}
           <section id="habilidades" className="py-20 container mx-auto px-4">
@@ -196,8 +261,7 @@ function App() {
             <Skills />
           </section>
 
-
-                    {/* Sobre mí */}
+          {/* Sobre mí */}
           <section id="sobremi" className="py-20 container mx-auto px-4">
             <h2 className="text-3xl font-semibold mb-6">Sobre mí</h2>
             <p className="text-lg text-gray-700 dark:text-gray-300">

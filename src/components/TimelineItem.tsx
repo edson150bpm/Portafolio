@@ -1,54 +1,49 @@
 // src/components/TimelineItem.tsx
-import React, { useState } from 'react';
-import type { ReactNode } from 'react';
-import type { IconBaseProps } from 'react-icons';
-import { FiChevronRight as _FiChevronRight } from 'react-icons/fi';
+import React, { useState, useRef, useLayoutEffect } from 'react'
+import type { ReactNode } from 'react'
+import type { IconBaseProps } from 'react-icons'
+import { FiChevronRight as _FiChevronRight } from 'react-icons/fi'
 
-const FiChevronRight = _FiChevronRight as React.FC<IconBaseProps>;
+const FiChevronRight = _FiChevronRight as React.FC<IconBaseProps>
 
 interface Props {
-  title: string;
-  subtitle: string;
-  date: string;
-  children: ReactNode;
-  linkText?: string;
-  linkUrl?: string;
+  title: string
+  subtitle: string
+  date: string
+  children: ReactNode
+  linkText?: string
+  linkUrl?: string
 }
 
-const TimelineItem: React.FC<Props> = ({
+export default function TimelineItem({
   title,
   subtitle,
   date,
   children,
   linkText,
-  linkUrl
-}) => {
-  const [expanded, setExpanded] = useState(false);
+  linkUrl,
+}: Props) {
+  const [expanded, setExpanded] = useState(false)
+  const contentRef = useRef<HTMLDivElement>(null)
+  const [height, setHeight] = useState<number>(0)
+
+  // Cada vez que montamos o cambia expanded, recalculamos la altura
+  useLayoutEffect(() => {
+    if (contentRef.current) {
+      const full = contentRef.current.scrollHeight
+      setHeight(expanded ? full : 96) // 96px == 6rem (~4 líneas)
+    }
+  }, [expanded])
 
   return (
     <div className="flex items-stretch mb-16">
-      {/* Punto + línea con fade en la parte baja */}
+      {/* PUNTO + LÍNEA */}
       <div className="relative flex flex-col items-center mr-8">
         <span className="block w-3 h-3 rounded-full bg-yellow-400" />
         <span className="block flex-1 w-px bg-gray-300 dark:bg-gray-600 mt-1" />
-
-        {/* Overlay degradado sobre la línea */}
-        {!expanded && (
-          <div
-            className={`
-              absolute bottom-0
-              left-1/2 transform -translate-x-1/2
-              h-12 w-px
-              pointer-events-none
-              bg-gradient-to-t
-                from-white dark:from-gray-900
-                to-transparent
-            `}
-          />
-        )}
       </div>
 
-      {/* Contenido */}
+      {/* CONTENIDO */}
       <div className="flex-1">
         <h3 className="text-2xl font-bold text-yellow-400 mb-1">{title}</h3>
         <p className="text-lg font-medium text-gray-800 dark:text-gray-200 mb-1">
@@ -56,36 +51,23 @@ const TimelineItem: React.FC<Props> = ({
         </p>
         <p className="text-xs text-gray-500 dark:text-gray-400 mb-4">{date}</p>
 
-        {/* Descripción con fade + expand */}
-        <div className="relative mb-2">
-          <div
-            className={`
-              prose prose-invert max-w-none
-              text-gray-700 dark:text-gray-300
-              transition-all duration-300 ease-in-out
-              ${expanded
-                ? 'max-h-none overflow-visible'
-                : 'max-h-24 overflow-hidden'}
-            `}
-          >
+        {/* DESCRIPCIÓN ANIMADA */}
+        <div
+          ref={contentRef}
+          style={{
+            height: `${height}px`,
+            transition: 'height 0.4s ease',
+            overflow: 'hidden',
+          }}
+        >
+          <div className="prose prose-invert text-gray-700 dark:text-gray-300">
             {children}
           </div>
-          {!expanded && (
-            <div
-              className="
-                absolute bottom-0 left-0 w-full h-12
-                pointer-events-none
-                bg-gradient-to-t
-                from-white dark:from-gray-900
-                to-transparent
-              "
-            />
-          )}
         </div>
 
         <button
           onClick={() => setExpanded(!expanded)}
-          className="text-sm font-medium text-cyan-500 hover:underline mb-4"
+          className="text-sm font-medium text-cyan-500 hover:underline my-4"
         >
           {expanded ? 'Ver menos' : 'Ver más'}
         </button>
@@ -103,7 +85,5 @@ const TimelineItem: React.FC<Props> = ({
         )}
       </div>
     </div>
-  );
-};
-
-export default TimelineItem;
+  )
+}

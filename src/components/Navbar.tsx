@@ -1,3 +1,4 @@
+// src/components/Navbar.tsx
 import React, { useState, useEffect } from 'react';
 import type { IconBaseProps } from 'react-icons';
 import { FiMenu as _FiMenu, FiX as _FiX } from 'react-icons/fi';
@@ -12,20 +13,25 @@ interface Props {
   setTheme: React.Dispatch<React.SetStateAction<Theme>>;
 }
 
-const SECTIONS = ['Experiencia', 'Proyectos', 'Sobre mí', 'Contacto'];
+// Añadimos "Inicio" apuntando al id="hero"
+const NAV_ITEMS: { title: string; id: string }[] = [
+  { title: 'Inicio',                 id: 'hero'         },
+  { title: 'Experiencia',            id: 'experiencia'   },
+  { title: 'Proyectos Destacados',   id: 'proyectos'     },
+  { title: 'Habilidades & Herramientas', id: 'habilidades' },
+  { title: 'Sobre mí',               id: 'sobremi'       },
+];
 
 export default function Navbar({ theme, setTheme }: Props) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
-  // Detectar scroll
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 10);
     window.addEventListener('scroll', onScroll);
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  // Colores base según tema
   const bgPill = theme === 'light' ? 'bg-white' : 'bg-gray-800';
   const textPill = theme === 'light'
     ? 'text-gray-800 hover:text-cyan-600'
@@ -40,22 +46,20 @@ export default function Navbar({ theme, setTheme }: Props) {
           transition-all duration-300 ease-in-out
           px-5
           ${scrolled
-            ? // Glass effect al hacer scroll
-              'bg-white/70 dark:bg-gray-800/70 backdrop-blur-md py-3'
-            : // Estado inicial más grueso
-              `${bgPill} py-2`
+            ? 'bg-white/70 dark:bg-gray-800/70 backdrop-blur-md py-3'
+            : `${bgPill} py-2`
           }
         `}
       >
         {/* Enlaces (ocultos en móvil) */}
         <div className="hidden md:flex items-center space-x-6">
-          {SECTIONS.map(sec => (
+          {NAV_ITEMS.map(item => (
             <a
-              key={sec}
-              href={`#${sec.toLowerCase().replace(/\s+/g, '')}`}
+              key={item.id}
+              href={`#${item.id}`}
               className={`transition-colors ${textPill}`}
             >
-              {sec}
+              {item.title}
             </a>
           ))}
         </div>
@@ -90,14 +94,14 @@ export default function Navbar({ theme, setTheme }: Props) {
           `}
         >
           <ul className="flex flex-col space-y-3">
-            {SECTIONS.map(sec => (
-              <li key={sec}>
+            {NAV_ITEMS.map(item => (
+              <li key={item.id}>
                 <a
-                  href={`#${sec.toLowerCase().replace(/\s+/g, '')}`}
+                  href={`#${item.id}`}
                   onClick={() => setMenuOpen(false)}
                   className={`block text-center transition-colors ${textPill}`}
                 >
-                  {sec}
+                  {item.title}
                 </a>
               </li>
             ))}

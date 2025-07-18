@@ -11,6 +11,8 @@ import reactNativeImg  from '../assets/skills/reactnative.png';
 import nextImg         from '../assets/skills/next.png';
 import laravelImg      from '../assets/skills/laravel.png';
 import tailwindImg     from '../assets/skills/Tailwind.png';
+import expo            from '../assets/skills/expo.svg';
+
 
 import figmaImg        from '../assets/skills/Figma.svg';
 import scrumImg        from '../assets/skills/scrum.png';
@@ -24,7 +26,11 @@ import nodejs          from '../assets/skills/Nodejs.png';
 import php             from '../assets/skills/PHP.png';
 
 import Mysql           from '../assets/skills/MySQL.png';
-import Postgresql           from '../assets/skills/Postgresql.png';
+import Postgresql      from '../assets/skills/Postgresql.png';
+import firebase        from '../assets/skills/fierebase.png';
+
+
+
 
 
 type SkillItem = {
@@ -54,7 +60,9 @@ const categories: {
       { src: reactNativeImg, alt: 'React Native', mobile: 'w-[48px] h-[48px]',  md: 'md:w-[64px] md:h-[64px]' },
       { src: nextImg,        alt: 'Next.js',      mobile: 'w-[48px] h-[48px]',  md: 'md:w-[64px] md:h-[64px]' },
       { src: tailwindImg,    alt: 'Tailwind CSS', mobile: 'w-[48px] h-[48px]',  md: 'md:w-[64px] md:h-[64px]' },
-      { src: laravelImg, alt: 'Laravel',    mobile: 'w-[90px] h-[40px]',   md: 'md:w-[140px] md:h-[56px]' }
+      { src: laravelImg, alt: 'Laravel',    mobile: 'w-[90px] h-[40px]',   md: 'md:w-[140px] md:h-[56px]' },
+      { src: expo, alt: 'Expo go',    mobile: 'w-[90px] h-[40px]',   md: 'md:w-[140px] md:h-[56px]' }
+
 
     ]
   },
@@ -84,6 +92,7 @@ const categories: {
     items: [
       { src: Mysql, alt: 'MySQL', mobile: 'w-[48px] h-[48px]',  md: 'md:w-[120px] md:h-[90px]' },
       { src: Postgresql, alt: 'Postgresql', mobile: 'w-[48px] h-[48px]',  md: 'md:w-[64px] md:h-[64px]' },
+      { src: firebase, alt: 'Firebase', mobile: 'w-[48px] h-[48px]',  md: 'md:w-[90px] md:h-[90px]' },
 
     ]
   }

@@ -1,19 +1,12 @@
 // src/components/ProjectCard.tsx
-import React from 'react';
-import type { IconBaseProps } from 'react-icons';
-import { MdOpenInNew as _MdOpenInNew } from 'react-icons/md';
-import { FaGithub as _FaGithub } from 'react-icons/fa';
-
-const MdOpenInNew = _MdOpenInNew as React.FC<IconBaseProps>;
-const FaGithub     = _FaGithub     as React.FC<IconBaseProps>;
+import React, { useState, useRef, useLayoutEffect } from 'react'
 
 interface Props {
-  title: string;
-  description: string;
-  tech: string[];
-  image: string;
-  linkCode?: string;
-  linkPreview?: string;
+  title: string
+  description: string
+  tech: string[]
+  image: string
+  onImageClick?: () => void
 }
 
 export default function ProjectCard({
@@ -21,74 +14,95 @@ export default function ProjectCard({
   description,
   tech,
   image,
-  linkCode,
-  linkPreview
+  onImageClick,
 }: Props) {
+  const [expanded, setExpanded] = useState(false)
+  const contentRef = useRef<HTMLDivElement>(null)
+  const [height, setHeight] = useState<number>(0)
+
+  // Altura cerrada en píxeles (aprox. 4 líneas de texto)
+  const COLLAPSED_HEIGHT = 96
+
+  // Cada vez que cambie expanded, recalculamos scrollHeight
+  useLayoutEffect(() => {
+    if (contentRef.current) {
+      const full = contentRef.current.scrollHeight
+      setHeight(expanded ? full : COLLAPSED_HEIGHT)
+    }
+  }, [expanded, description])
+
+  // ¿Descripción larga?
+  const isLong = description.length > 150
+
   return (
     <div
       className="
-        w-full
-        bg-white dark:bg-gray-800
-        border border-gray-200 dark:border-gray-700
-        rounded-lg overflow-hidden
-        flex flex-col md:flex-row
+        h-full flex flex-col
+        bg-gradient-to-br from-cyan-50 via-white to-cyan-50
+        dark:from-gray-800 dark:via-gray-900 dark:to-gray-800
+        p-6 rounded-lg shadow-lg
+        transform transition-transform duration-300 hover:scale-105
+        overflow-hidden
       "
     >
       {/* Imagen */}
-      <div className="w-full md:w-1/3 h-48 md:h-auto flex-shrink-0">
-        <img
-          src={image}
-          alt={title}
-          className="object-cover w-full h-full"
-        />
-      </div>
+      <img
+        className="w-full h-48 object-cover cursor-pointer rounded-md"
+        src={image}
+        alt={title}
+        onClick={onImageClick}
+      />
 
       {/* Contenido */}
-      <div className="p-6 flex-1 flex flex-col justify-between">
-        <div>
-          <h3 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-2">
-            {title}
-          </h3>
+      <div className="mt-4 flex-1 flex flex-col">
+        <h3
+          className="
+            text-2xl font-semibold mb-2
+            text-transparent bg-clip-text
+            bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500
+            animate-pulse
+          "
+        >
+          {title}
+        </h3>
 
-          <ul className="flex flex-wrap gap-2 mb-4">
-            {tech.map(t => (
-              <li
-                key={t}
-                className="px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-300 rounded-full text-sm"
-              >
-                {t}
-              </li>
-            ))}
-          </ul>
-
-          <p className="text-gray-700 dark:text-gray-300 mb-6">
-            {description}
-          </p>
+        {/* Descripción animada */}
+        <div
+          ref={contentRef}
+          style={{
+            height: `${height}px`,
+            transition: 'height 0.4s ease',
+            overflow: 'hidden',
+          }}
+          className="text-gray-700 dark:text-gray-300 text-base mb-2"
+        >
+          {description}
         </div>
 
-        <div className="flex gap-3">
-          {linkCode && (
-            <a
-              href={linkCode}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center px-4 py-2 bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-100 rounded hover:bg-gray-200 dark:hover:bg-gray-600 transition"
-            >
-              <FaGithub className="mr-2" /> Código
-            </a>
-          )}
-          {linkPreview && (
-            <a
-              href={linkPreview}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center px-4 py-2 bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-100 rounded hover:bg-gray-200 dark:hover:bg-gray-600 transition"
-            >
-              <MdOpenInNew className="mr-2" /> Preview
-            </a>
-          )}
-        </div>
+        {isLong && (
+          <button
+            onClick={e => {
+              e.stopPropagation()
+              setExpanded(!expanded)
+            }}
+            className="self-start text-sm text-cyan-500 hover:underline mb-4"
+          >
+            {expanded ? 'Ver menos' : 'Ver más'}
+          </button>
+        )}
+      </div>
+
+      {/* Tags */}
+      <div className="mt-4 flex flex-wrap gap-2">
+        {tech.map(t => (
+          <span
+            key={t}
+            className="inline-block bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 text-sm font-semibold px-3 py-1 rounded-full"
+          >
+            {t}
+          </span>
+        ))}
       </div>
     </div>
-  );
+  )
 }
