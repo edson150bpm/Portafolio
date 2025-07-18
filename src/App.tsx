@@ -6,6 +6,8 @@ import Navbar from './components/Navbar';
 import Skills from './components/Skills';
 import Timeline, { Experience } from './components/Timeline';
 import ProjectCard from './components/ProjectCard';
+import ScrollReveal from './components/ScrollReveal'
+
 
 import perfil from './assets/img/perfil.png';
 import siaImg from './assets/img/sia.png';
@@ -160,116 +162,127 @@ function App() {
         <Navbar theme={theme} setTheme={setTheme} />
 
         <main className="pt-20">
-          {/* Hero */}
-          <section
-            id="hero"
-            className="min-h-[70vh] flex flex-col justify-center items-start md:items-center text-left md:text-center px-4 py-12"
-          >
-            <img
-              src={perfil}
-              alt="Foto de perfil"
-              className="w-32 h-32 mb-4"
-            />
-            <h1 className="text-5xl font-bold mb-3">
-              Hey, soy <span className="text-cyan-400">Edson Rodríguez</span>
-            </h1>
-            <p className="max-w-3xl text-lg leading-relaxed text-gray-700 dark:text-gray-300">
-              Frontend Developer con{' '}
-              <span className="text-yellow-400">más de 4 años</span> de experiencia
-              construyendo interfaces con React, React Native y Next.js.
-            </p>
-            <div className="mt-6 flex space-x-4">
-              <a
-                href="mailto:edsonrf896@gmail.com"
-                className="inline-flex items-center px-6 py-3 border border-gray-300 rounded-full text-gray-800 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700 transition"
-              >
-                <AiOutlineMail className="mr-2 text-xl" />
-                Contáctame
-              </a>
-              <a
-                href="https://www.linkedin.com/in/edson-rodriguez-219820253/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center px-6 py-3 border border-gray-300 rounded-full text-gray-800 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700 transition"
-              >
-                <FaLinkedin className="mr-2 text-xl" />
-                LinkedIn
-              </a>
-              <a
-                href="https://github.com/edson150bpm"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center px-6 py-3 border border-gray-300 rounded-full text-gray-800 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700 transition"
-              >
-                <FaGithub className="mr-2 text-xl" />
-                GitHub
-              </a>
-            </div>
-          </section>
-
-          {/* Experiencia Laboral */}
-          <section id="experiencia" className="py-20 container mx-auto px-4">
-            <h2 className="text-3xl font-semibold mb-8 flex items-center">
-              <FaBriefcase className="text-2xl mr-2" />
-              Experiencia Laboral
-            </h2>
-            <Timeline entries={experiencia} />
-          </section>
-
-          {/* Proyectos Destacados */}
-          <section id="proyectos" className="py-20 container mx-auto px-4">
-            <h2 className="text-3xl font-semibold mb-8 flex items-center text-gray-900 dark:text-gray-100">
-              <code className="text-xl mr-2">{"</>"}</code> Proyectos Destacados
-            </h2>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
-              {proyectos.map((p, i) => (
-                <div
-                  key={i}
-                  className="cursor-pointer"
-                  onClick={() => setLightboxImg(p.image)}
-                >
-                  <ProjectCard {...p} />
-                </div>
-              ))}
-            </div>
-          </section>
-
-          {/* Lightbox Modal */}
-          {lightboxImg && (
-            <div
-              className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 p-4"
-              onClick={() => setLightboxImg(null)}
+          <ScrollReveal>
+            {/* Hero */}
+            <section
+              id="hero"
+              className="min-h-[70vh] flex flex-col justify-center items-start md:items-center text-left md:text-center px-4 py-12"
             >
               <img
-                src={lightboxImg}
-                alt="Preview"
-                className="
+                src={perfil}
+                alt="Foto de perfil"
+                className="w-32 h-32 mb-4"
+              />
+              <h1 className="text-5xl font-bold mb-3">
+                Hey, soy <span className="text-cyan-400">Edson Rodríguez</span>
+              </h1>
+              <p className="max-w-3xl text-lg leading-relaxed text-gray-700 dark:text-gray-300">
+                Frontend Developer con{' '}
+                <span className="text-yellow-400">más de 4 años</span> de experiencia
+                construyendo interfaces con React, React Native y Next.js.
+              </p>
+              <div className="mt-6 flex space-x-4">
+                <a
+                  href="mailto:edsonrf896@gmail.com"
+                  className="inline-flex items-center px-6 py-3 border border-gray-300 rounded-full text-gray-800 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700 transition"
+                >
+                  <AiOutlineMail className="mr-2 text-xl" />
+                  Contáctame
+                </a>
+                <a
+                  href="https://www.linkedin.com/in/edson-rodriguez-219820253/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center px-6 py-3 border border-gray-300 rounded-full text-gray-800 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700 transition"
+                >
+                  <FaLinkedin className="mr-2 text-xl" />
+                  LinkedIn
+                </a>
+                <a
+                  href="https://github.com/edson150bpm"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center px-6 py-3 border border-gray-300 rounded-full text-gray-800 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700 transition"
+                >
+                  <FaGithub className="mr-2 text-xl" />
+                  GitHub
+                </a>
+              </div>
+            </section>
+          </ScrollReveal>
+
+          {/* Experiencia Laboral */}
+          <ScrollReveal>
+            <section id="experiencia" className="py-20 container mx-auto px-4">
+              <h2 className="text-3xl font-semibold mb-8 flex items-center">
+                <FaBriefcase className="text-2xl mr-2" />
+                Experiencia Laboral
+              </h2>
+              <Timeline entries={experiencia} />
+            </section>
+          </ScrollReveal>
+          <ScrollReveal>
+            {/* Proyectos Destacados */}
+            <section id="proyectos" className="py-20 container mx-auto px-4">
+              <h2 className="text-3xl font-semibold mb-8 flex items-center text-gray-900 dark:text-gray-100">
+                <code className="text-xl mr-2">{"</>"}</code> Proyectos Destacados
+              </h2>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
+                {proyectos.map((p, i) => (
+                  <div
+                    key={i}
+                    className="cursor-pointer"
+                    onClick={() => setLightboxImg(p.image)}
+                  >
+                    <ProjectCard {...p} />
+                  </div>
+                ))}
+              </div>
+            </section>
+          </ScrollReveal>
+
+          {/* Lightbox Modal */}
+          <ScrollReveal>
+            {lightboxImg && (
+              <div
+                className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 p-4"
+                onClick={() => setLightboxImg(null)}
+              >
+                <img
+                  src={lightboxImg}
+                  alt="Preview"
+                  className="
                   max-h-[80vh] max-w-[90vw]
                   sm:max-w-[70vw] md:max-w-[50vw]
                   rounded-lg shadow-lg
                 "
-              />
-            </div>
-          )}
+                />
+              </div>
+            )}
+          </ScrollReveal>
 
           {/* Habilidades */}
-          <section id="habilidades" className="py-20 container mx-auto px-4">
-            <h2 className="text-3xl font-semibold mb-6">
-              Habilidades &amp; Herramientas
-            </h2>
-            <Skills />
-          </section>
 
+          <ScrollReveal>
+            <section id="habilidades" className="py-20 container mx-auto px-4">
+              <h2 className="text-3xl font-semibold mb-6">
+                Habilidades &amp; Herramientas
+              </h2>
+              <Skills />
+            </section>
+          </ScrollReveal>
           {/* Sobre mí */}
-          <section id="sobremi" className="py-20 container mx-auto px-4">
-            <h2 className="text-3xl font-semibold mb-6">Sobre mí</h2>
-            <p className="text-lg text-gray-700 dark:text-gray-300">
-              Soy Edson Rodríguez, Frontend Developer con experiencia en React,
-              React Native y Next.js. Me especializo en interfaces interactivas,
-              rendimiento y buenas prácticas de accesibilidad y testing.
-            </p>
-          </section>
+          <ScrollReveal>
+            <section id="sobremi" className="py-20 container mx-auto px-4">
+              <h2 className="text-3xl font-semibold mb-6">Sobre mí</h2>
+              <p className="text-lg text-gray-700 dark:text-gray-300">
+                Soy Edson Rodríguez, Frontend Developer con experiencia en React,
+                React Native y Next.js. Me especializo en interfaces interactivas,
+                rendimiento y buenas prácticas de accesibilidad y testing.
+              </p>
+            </section>
+          </ScrollReveal>
         </main>
       </div>
     </div>
