@@ -177,9 +177,8 @@ function App() {
                 Hey, soy <span className="text-cyan-400">Edson Rodríguez</span>
               </h1>
               <p className="max-w-3xl text-lg leading-relaxed text-gray-700 dark:text-gray-300">
-                Frontend Developer con{' '}
-                <span className="text-yellow-400">más de 4 años</span> de experiencia
-                construyendo interfaces con React, React Native y Next.js.
+                <span className="text-yellow-400">+4 años de experiencia. </span>
+                Frontend Developer y Creador de interfaces interactivas desde Autlan de Navarro, México. Experto en React, React Native, Next.js y Tailwind CSS, construyendo aplicaciones web como moviles únicas y de alto rendimiento.
               </p>
               <div className="mt-6 flex space-x-4">
                 <a
@@ -276,12 +275,35 @@ function App() {
           <ScrollReveal>
             <section id="sobremi" className="py-20 container mx-auto px-4">
               <h2 className="text-3xl font-semibold mb-6">Sobre mí</h2>
+
+              <p className="text-lg text-gray-700 dark:text-gray-300 mb-4">
+                Soy <span className="text-yellow-400">Edson Alejandro Rodríguez Flores</span>, ingeniero en{' '}
+                <span className="text-yellow-400">Teleinformática</span> egresado de la{' '}
+                <span className="text-yellow-400">Universidad de Guadalajara</span>. Cuento con{' '}
+                <span className="text-yellow-400">más de cuatro años de experiencia</span> colaborando
+                 estrechamente con equipos de desarrollo en la Universidad de Guadalajara como en{' '}
+                <span className="text-yellow-400">Vulcanics</span> (actualmente de forma remota),
+                liderando proyectos de extremo a extremo.
+              </p>
+
               <p className="text-lg text-gray-700 dark:text-gray-300">
-                Soy Edson Rodríguez, Frontend Developer con experiencia en React,
-                React Native y Next.js. Me especializo en interfaces interactivas,
-                rendimiento y buenas prácticas de accesibilidad y testing.
+                Tengo experiencia implementando arquitecturas <span className="text-yellow-400">MVC</span> con{' '}
+                <span className="text-yellow-400">Laravel</span> y <span className="text-yellow-400">PHP</span>, desarrollando
+                interfaces y prototipos en <span className="text-yellow-400">Figma</span>, y construyendo aplicaciones
+                web y móviles usando tecnologías como{' '}
+                <span className="text-yellow-400">React</span>, <span className="text-yellow-400">React Native</span>,{' '}
+                <span className="text-yellow-400">Next.js</span> y <span className="text-yellow-400">Tailwind CSS</span>.
+
+                Disfruto <span className="text-yellow-400">trabajar en equipo</span>, escribir código limpio y escalable,
+                y enfocarme en la optimización del rendimiento aplicando buenas prácticas y patrones de diseño. Soy
+                autodidacta y siempre estoy explorando <span className="text-yellow-400">nuevas tecnologías</span>, desde integrar{' '}
+                <span className="text-yellow-400">Firebase</span> para funcionalidades en tiempo real, hasta desplegar servicios
+                en <span className="text-yellow-400">Ubuntu</span> con <span className="text-yellow-400">Nginx</span> y{' '}
+                <span className="text-yellow-400">PM2</span>. Me motiva encontrar soluciones innovadoras que sean accesibles y eficientes.
               </p>
             </section>
+
+
           </ScrollReveal>
         </main>
       </div>
